@@ -1,9 +1,11 @@
+use reqwest::header::{USER_AGENT};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware, RequestBuilder};
 use reqwest_retry::policies::ExponentialBackoff;
 use reqwest_retry::RetryTransientMiddleware;
 use url::{ParseError, Url};
 use crate::sdk::logging::LoggingMiddleware;
 use crate::sdk::options::Options;
+use crate::sdk::VERSION;
 
 /// The base client for all of Smarty's rust sdk
 pub struct Client {
@@ -48,6 +50,8 @@ impl Client {
         for (header_key, header_value) in self.options.headers.clone() {
             builder = builder.header(header_key, header_value);
         }
+
+        builder = builder.header(USER_AGENT.to_string(), format!("smarty (sdk:rust@{})", VERSION));
 
         builder
     }

@@ -24,8 +24,7 @@ impl USExtractClient {
         let mut req = self.client.reqwest_client.request(Method::POST, self.client.url.clone());
         req = self.client.build_request(req);
         req = req.header("Content-Type", "text/plain");
-        //TODO: Implement this as params.
-        //req = req.query(&lookup.clone().into_param_array());
+        req = req.query(&lookup.clone().into_param_array());
         req = req.body(lookup.text.clone());
 
         let response = send_request(req).await?;

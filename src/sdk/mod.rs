@@ -12,6 +12,7 @@ pub mod authentication;
 pub mod batch;
 pub mod logging;
 
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const MAX_BATCH_SIZE: usize = 100;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize_repr, Deserialize_repr)]
@@ -73,6 +74,14 @@ pub(crate) fn has_i32_param(name: String, param: i32, default: i32) -> Option<(S
 }
 
 pub(crate) fn has_f64_param(name: String, param: f64, default: f64) -> Option<(String, String)>{
+    if param == default {
+        None
+    } else {
+        Some((name, param.to_string()))
+    }
+}
+
+pub(crate) fn has_bool_param(name: String, param: bool, default: bool) -> Option<(String, String)>{
     if param == default {
         None
     } else {

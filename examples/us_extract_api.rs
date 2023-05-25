@@ -7,15 +7,18 @@ use smarty_rust_sdk::sdk::authentication::SecretKeyCredential;
 use smarty_rust_sdk::sdk::options::Options;
 use smarty_rust_sdk::us_extract_api::client::USExtractClient;
 use smarty_rust_sdk::us_extract_api::lookup::Lookup;
+use smarty_rust_sdk::us_street_api::lookup::MatchStrategy;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
 
     let lookup = &mut Lookup {
-        text: "Meet me at 3214 N University Ave Provo UT 84604 just after 3pm.".to_string(),
+        text: "Meet me at 3214 N University Ave Provo UT 84604 just after 3pm.\n\
+               Or! We could meet at 1600 Pennsylvania Ave, Washington DC.".to_string(),
         aggressive: true,
-        addresses_with_line_breaks: false,
-        addresses_per_line: 1,
+        addresses_with_line_breaks: true,
+        addresses_per_line: 2,
+        match_strategy: MatchStrategy::Enhanced,
         ..Default::default()
     };
 
@@ -25,6 +28,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     options.license = "us-core-cloud".to_string();
 
     options.authentication = authentication;
+    options.logging_enabled = true;
 
     let client = USExtractClient::new(options)?;
 
