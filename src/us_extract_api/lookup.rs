@@ -27,6 +27,38 @@ impl Default for Lookup {
     }
 }
 
+// TODO: Implement this like the one in the python sdk.
+// impl Lookup {
+//     pub(crate) fn into_param_array(self) -> Vec<(String, String)> {
+//         let mut max_candidates_string = self.max_candidates.to_string();
+//
+//         if self.max_candidates <= 0 {
+//             max_candidates_string = String::default();
+//         }
+//
+//         if self.match_strategy == MatchStrategy::Enhanced {
+//             max_candidates_string = 5.to_string();
+//         }
+//
+//         vec![
+//             has_param("street".to_string(), self.street),
+//             has_param("street2".to_string(), self.street2),
+//             has_param("secondary".to_string(), self.secondary),
+//             has_param("city".to_string(), self.city),
+//             has_param("state".to_string(), self.state),
+//             has_param("zipcode".to_string(), self.zipcode),
+//             has_param("lastline".to_string(), self.last_line),
+//             has_param("adressee".to_string(), self.adressee),
+//             has_param("urbanization".to_string(), self.urbanization),
+//             has_param("input_id".to_string(), self.input_id),
+//             has_param("candidates".to_string(), max_candidates_string),
+//             has_param("match".to_string(), self.match_strategy.to_string()),
+//         ].iter()
+//             .filter_map(Option::clone)
+//             .collect::<Vec<_>>()
+//     }
+// }
+
 #[derive(Debug, Clone, PartialEq, Serialize)]
 pub enum HTMLPayload {
     #[serde(rename = "")]

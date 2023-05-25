@@ -15,12 +15,11 @@ impl<T> Default for Batch<T> {
     }
 }
 
-#[allow(dead_code)]
 impl<T> Batch<T> {
 
     pub fn push(&mut self, lookup: T) -> Result<(), SDKError> {
         if self.is_full() {
-            return Err(SDKError { code: None, detail: Some("Batch Is Full".to_string()) } )
+            return Err(SDKError { code: None, detail: Some(format!("Batch is full (max {})", MAX_BATCH_SIZE)) } )
         }
 
         self.lookups.push(lookup);

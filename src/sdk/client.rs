@@ -26,6 +26,10 @@ impl Client {
 
         let client = client_builder.build();
 
+        if options.logging_enabled == true {
+            env_logger::init();
+        }
+
         let client = Client {
             reqwest_client: client,
             url: url.clone(),

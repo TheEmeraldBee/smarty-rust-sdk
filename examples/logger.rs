@@ -43,11 +43,12 @@ async fn main() -> Result<(), Box<dyn Error>> {
     // Set The Authentication
     options.authentication = authentication;
 
+    // TODO: Remove the following after code review.
     // Setup the logger
     // To better learn, look at (https://rust-lang-nursery.github.io/rust-cookbook/development_tools/debugging/log.html)
-    env_logger::init();
+    // env_logger::init(); // This is now detected and performed in the client for you.
 
-    let client = USStreetAddressClient::new_custom_base_url("https://us-street.api.smartystreets.me/".parse()?, options)?;
+    let client = USStreetAddressClient::new_custom_base_url("https://us-street.api.smartystreets.com/".parse()?, options)?;
 
     client.send(batch).await?;
 
