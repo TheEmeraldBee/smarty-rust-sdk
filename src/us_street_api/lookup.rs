@@ -22,7 +22,7 @@ pub struct Lookup {
     #[serde(skip_serializing_if = "String::is_empty")]
     pub last_line: String, // "lastline" in json
     #[serde(skip_serializing_if = "String::is_empty")]
-    pub adressee: String,
+    pub addressee: String,
     #[serde(skip_serializing_if = "String::is_empty")]
     pub urbanization: String,
     #[serde(skip_serializing_if = "String::is_empty")]
@@ -49,7 +49,7 @@ impl Default for Lookup {
             state: String::default(),
             zipcode: String::default(),
             last_line: String::default(),
-            adressee: String::default(),
+            addressee: String::default(),
             urbanization: String::default(),
             input_id: String::default(),
             max_candidates: 1,
@@ -80,7 +80,7 @@ impl Lookup {
             has_param("state".to_string(), self.state),
             has_param("zipcode".to_string(), self.zipcode),
             has_param("lastline".to_string(), self.last_line),
-            has_param("adressee".to_string(), self.adressee),
+            has_param("addressee".to_string(), self.addressee),
             has_param("urbanization".to_string(), self.urbanization),
             has_param("input_id".to_string(), self.input_id),
             has_param("candidates".to_string(), max_candidates_string),
