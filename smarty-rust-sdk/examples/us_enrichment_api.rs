@@ -18,7 +18,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 
 async fn lookup<R: EnrichmentResponse>(key: u32) -> Result<(), Box<dyn Error>> {
-    let mut lookup = EnrichmentLookup::<R>::new(key);
+    let mut lookup = EnrichmentLookup::<R> {
+        smarty_key: key,
+        etag: "".to_string(),
+        ..Default::default()
+    };
 
     let authentication = SecretKeyCredential::new(
         std::env::var("SMARTY_AUTH_ID").expect("Missing SMARTY_AUTH_ID env variable"),

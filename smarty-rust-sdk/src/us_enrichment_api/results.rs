@@ -1,9 +1,9 @@
+use serde::de::DeserializeOwned;
 use serde::Deserialize;
 use serde::Serialize;
 use std::fmt::Debug;
-use serde::de::DeserializeOwned;
 
-pub trait EnrichmentResponse: Clone + Serialize + DeserializeOwned {
+pub trait EnrichmentResponse: Clone + Serialize + DeserializeOwned + Default {
     fn lookup_type() -> &'static str;
 }
 
